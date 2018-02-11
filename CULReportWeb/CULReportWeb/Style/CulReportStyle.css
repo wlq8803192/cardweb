@@ -1,0 +1,12 @@
+﻿body 
+{
+    font-family:Arial,宋体;font-size:10px; line-height:23px;
+}
+div#divTitle
+{
+    font-weight:bold;height:35px;
+}
+div
+{
+    width:600px;height:100%;margin-left:5px;
+}

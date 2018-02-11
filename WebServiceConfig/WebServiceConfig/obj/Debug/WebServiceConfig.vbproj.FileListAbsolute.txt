@@ -1,0 +1,27 @@
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.dll
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.pdb
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.xml
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\obj\Debug\ResolveAssemblyReference.cache
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.Resources.resources
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.vbproj.GenerateResource.Cache
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.dll
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.xml
+D:\Hyron Folder\BaiJieYu\workspace\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.pdb
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.dll
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.pdb
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.xml
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\ResolveAssemblyReference.cache
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.Resources.resources
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.vbproj.GenerateResource.Cache
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.dll
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.xml
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.pdb
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.pdb
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\bin\WebServiceConfig.xml
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\ResolveAssemblyReference.cache
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.Resources.resources
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.vbproj.GenerateResource.Cache
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.xml
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebServiceConfig\WebServiceConfig\obj\Debug\WebServiceConfig.pdb

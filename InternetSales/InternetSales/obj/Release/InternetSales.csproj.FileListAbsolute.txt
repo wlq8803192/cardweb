@@ -1,0 +1,5 @@
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\bin\InternetSales.dll
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\bin\InternetSales.pdb
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\obj\Release\ResolveAssemblyReference.cache
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\obj\Release\InternetSales.dll
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\obj\Release\InternetSales.pdb

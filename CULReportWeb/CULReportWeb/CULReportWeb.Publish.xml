@@ -1,0 +1,28 @@
+<publishData>
+  <publishTarget publishUrl="E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebSite\CULReportWeb\">
+    <file relUrl="Style/CulReportStyle.css" publishTime="08/07/2014 09:53:05" />
+    <file relUrl="Web.Debug.config" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="bin/CULReportWeb.pdb" publishTime="09/23/2014 11:37:03" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="Web.config" publishTime="09/23/2014 11:35:57" />
+    <file relUrl="Default.aspx" publishTime="07/31/2014 20:32:48" />
+    <file relUrl="Web.Release.config" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="bin/CULReportWeb.dll" publishTime="09/23/2014 11:37:03" />
+    <file relUrl="CULReportConfig.xml" publishTime="05/15/2015 15:34:18" />
+    <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="07/30/2014 14:51:23" />
+  </publishTarget>
+  <publishTarget publishUrl="E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebSite\">
+    <file relUrl="Style/CulReportStyle.css" publishTime="08/07/2014 09:53:05" />
+    <file relUrl="Web.Debug.config" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="bin/CULReportWeb.pdb" publishTime="09/23/2014 11:37:03" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="Web.config" publishTime="09/23/2014 11:35:57" />
+    <file relUrl="Default.aspx" publishTime="07/31/2014 20:32:48" />
+    <file relUrl="Web.Release.config" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="07/30/2014 14:51:23" />
+    <file relUrl="bin/CULReportWeb.dll" publishTime="09/23/2014 11:37:03" />
+    <file relUrl="CULReportConfig.xml" publishTime="05/15/2015 15:34:18" />
+    <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="07/30/2014 14:51:23" />
+  </publishTarget>
+</publishData>

@@ -1,0 +1,14 @@
+<publishData>
+  <publishTarget publishUrl="E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebSite\InternetSalesTest\">
+    <file relUrl="bin/InternetSales.dll" publishTime="10/12/2015 10:45:17" />
+    <file relUrl="Web.config" publishTime="10/12/2015 10:22:35" />
+    <file relUrl="bin/InternetSales.pdb" publishTime="10/12/2015 10:45:16" />
+    <file relUrl="Service.asmx" publishTime="11/14/2014 14:10:21" />
+  </publishTarget>
+  <publishTarget publishUrl="E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\WebSite\InternetSales\">
+    <file relUrl="bin/InternetSales.dll" publishTime="12/05/2014 12:01:44" />
+    <file relUrl="Service.asmx" publishTime="11/14/2014 14:10:21" />
+    <file relUrl="bin/InternetSales.pdb" publishTime="12/05/2014 12:01:44" />
+    <file relUrl="Web.config" publishTime="12/05/2014 12:01:38" />
+  </publishTarget>
+</publishData>

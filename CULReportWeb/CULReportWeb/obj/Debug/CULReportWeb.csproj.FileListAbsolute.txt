@@ -1,0 +1,9 @@
+D:\Project\Program\ShoppingCard\CULReportWeb\CULReportWeb\CULReportWeb\bin\CULReportWeb.dll
+D:\Project\Program\ShoppingCard\CULReportWeb\CULReportWeb\CULReportWeb\bin\CULReportWeb.pdb
+D:\Project\Program\ShoppingCard\CULReportWeb\CULReportWeb\CULReportWeb\obj\Debug\CULReportWeb.dll
+D:\Project\Program\ShoppingCard\CULReportWeb\CULReportWeb\CULReportWeb\obj\Debug\CULReportWeb.pdb
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\CULReportWeb\CULReportWeb\bin\CULReportWeb.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\CULReportWeb\CULReportWeb\bin\CULReportWeb.pdb
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\CULReportWeb\CULReportWeb\obj\Debug\ResolveAssemblyReference.cache
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\CULReportWeb\CULReportWeb\obj\Debug\CULReportWeb.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\CULReportWeb\CULReportWeb\obj\Debug\CULReportWeb.pdb

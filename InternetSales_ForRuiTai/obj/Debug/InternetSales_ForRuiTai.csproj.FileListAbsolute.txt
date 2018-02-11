@@ -1,0 +1,10 @@
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales_ForRuiTai\bin\InternetSales_ForRuiTai.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales_ForRuiTai\bin\InternetSales_ForRuiTai.pdb
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales_ForRuiTai\obj\Debug\ResolveAssemblyReference.cache
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales_ForRuiTai\obj\Debug\InternetSales_ForRuiTai.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales_ForRuiTai\obj\Debug\InternetSales_ForRuiTai.pdb
+E:\Hyron Folder\ZhangYiXin\qiuming\InternetSales_ForRuiTai\obj\Debug\ResolveAssemblyReference.cache
+E:\Hyron Folder\ZhangYiXin\qiuming\InternetSales_ForRuiTai\obj\Debug\InternetSales_ForRuiTai.dll
+E:\Hyron Folder\ZhangYiXin\qiuming\InternetSales_ForRuiTai\bin\InternetSales_ForRuiTai.dll
+E:\Hyron Folder\ZhangYiXin\qiuming\InternetSales_ForRuiTai\bin\InternetSales_ForRuiTai.pdb
+E:\Hyron Folder\ZhangYiXin\qiuming\InternetSales_ForRuiTai\obj\Debug\InternetSales_ForRuiTai.pdb

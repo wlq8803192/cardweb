@@ -1,0 +1,10 @@
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales\InternetSales\bin\InternetSales.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales\InternetSales\bin\InternetSales.pdb
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales\InternetSales\obj\Debug\ResolveAssemblyReference.cache
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales\InternetSales\obj\Debug\InternetSales.dll
+E:\Hyron Folder\BaiJieYu\workspace\00-SCS All\InternetSales\InternetSales\obj\Debug\InternetSales.pdb
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\bin\InternetSales.dll
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\bin\InternetSales.pdb
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\obj\Debug\InternetSales.dll
+D:\Project\Program\ShoppingCard\InternetSales\InternetSales\obj\Debug\InternetSales.pdb

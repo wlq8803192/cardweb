@@ -1,0 +1,23 @@
+<publishData>
+  <publishTarget publishUrl="D:\Hyron Folder\BaiJieYu\For Eros\ShoppingCardReportWS\">
+    <file relUrl="bin/ShoppingCardWebService.dll" publishTime="06/12/2014 15:06:43" />
+    <file relUrl="bin/ShoppingCardWebService.pdb" publishTime="06/12/2014 15:06:43" />
+    <file relUrl="Web.config" publishTime="06/12/2014 15:06:35" />
+    <file relUrl="bin/ShoppingCardWebService.xml" publishTime="06/12/2014 15:06:43" />
+    <file relUrl="Service.asmx" publishTime="03/31/2014 17:42:28" />
+  </publishTarget>
+  <publishTarget publishUrl="D:\ShoppingCardReportWS\">
+    <file relUrl="bin/ShoppingCardWebService.dll" publishTime="04/03/2014 10:14:50" />
+    <file relUrl="bin/ShoppingCardWebService.pdb" publishTime="04/03/2014 10:14:50" />
+    <file relUrl="Web.config" publishTime="03/31/2014 11:36:10" />
+    <file relUrl="bin/ShoppingCardWebService.xml" publishTime="04/03/2014 10:14:50" />
+    <file relUrl="Service.asmx" publishTime="03/31/2014 17:42:28" />
+  </publishTarget>
+  <publishTarget publishUrl="D:\Hyron Folder\BaiJieYu\workspace\WebService\">
+    <file relUrl="bin/ShoppingCardWebService.dll" publishTime="04/01/2014 10:10:16" />
+    <file relUrl="Service.asmx" publishTime="03/31/2014 17:42:28" />
+    <file relUrl="bin/ShoppingCardWebService.pdb" publishTime="04/01/2014 10:10:16" />
+    <file relUrl="bin/ShoppingCardWebService.xml" publishTime="04/01/2014 10:10:16" />
+    <file relUrl="Web.config" publishTime="03/31/2014 11:36:10" />
+  </publishTarget>
+</publishData>

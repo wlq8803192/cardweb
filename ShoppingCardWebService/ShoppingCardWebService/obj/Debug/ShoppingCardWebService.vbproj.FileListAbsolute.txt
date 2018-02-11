@@ -1,0 +1,27 @@
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\bin\ShoppingCardWebService.dll
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\bin\ShoppingCardWebService.pdb
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\bin\ShoppingCardWebService.xml
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ResolveAssemblyReference.cache
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.Resources.resources
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.vbproj.GenerateResource.Cache
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.dll
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.xml
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.pdb
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\bin\ShoppingCardWebService.dll
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\bin\ShoppingCardWebService.pdb
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\bin\ShoppingCardWebService.xml
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\obj\Debug\ResolveAssemblyReference.cache
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.Resources.resources
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.vbproj.GenerateResource.Cache
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.dll
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.xml
+D:\Hyron Folder\BaiJieYu\workspace\ShoppingCardWebService_bak\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.pdb
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\bin\ShoppingCardWebService.dll
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\bin\ShoppingCardWebService.pdb
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\bin\ShoppingCardWebService.xml
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ResolveAssemblyReference.cache
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.Resources.resources
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.vbproj.GenerateResource.Cache
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.dll
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.xml
+D:\Hyron Folder\BaiJieYu\workspace\00-SCS All\ShoppingCardWebService\ShoppingCardWebService\obj\Debug\ShoppingCardWebService.pdb

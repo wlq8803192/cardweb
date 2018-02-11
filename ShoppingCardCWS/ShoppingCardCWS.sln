@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ShoppingCardCWS", ".", "{2BBF0E4E-A1C7-49C6-940D-143F53A1A774}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/ShoppingCardCWS"
+		Debug.AspNetCompiler.PhysicalPath = "..\ShoppingCardCWS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ShoppingCardCWS\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ShoppingCardCWS"
+		Release.AspNetCompiler.PhysicalPath = "..\ShoppingCardCWS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ShoppingCardCWS\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4794"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BBF0E4E-A1C7-49C6-940D-143F53A1A774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBF0E4E-A1C7-49C6-940D-143F53A1A774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

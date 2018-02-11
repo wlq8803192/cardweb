@@ -1,0 +1,4360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="http://service.imtxn.ws.cul.com" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ax250="http://bean.service.cardholder.ws.cul.com/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax246="http://bean.service.imtxn.ws.cul.com/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax248="http://bean.service.gap.ws.cul.com/xsd" targetNamespace="http://service.imtxn.ws.cul.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>imTxnService</wsdl:documentation>
+  <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="UTOverTransport">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Lax />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient" />
+          </wsp:Policy>
+        </sp:SignedSupportingTokens>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://bean.service.imtxn.ws.cul.com/xsd">
+      <xs:complexType name="VtxnvoidBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnSeq" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VCodeMsg">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VtqyBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="queryType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VtqyData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:VCodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="voucherTxns" nillable="true" type="ax246:VoucherTxn" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VoucherTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ICNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="batchNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="createTimestamp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="createUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="operId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="operType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="refNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="respCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="settleDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="traceNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="tranCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="tranMode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VStatusBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="opeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VrstpBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VIslvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="effectiveDay" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VInfoBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VInfoData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:VCodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="vouchers" nillable="true" type="ax246:Voucher" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Voucher">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="activeDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="activeMer" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="activeMerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="useMer" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="useMerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="useTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VIdvvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VIctvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seqNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeIdFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="typeIdTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNoTo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="UpdpBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="newPassword" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="oldPassword" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CodeMsg">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StatBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RstptBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RstpBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OfflineActiveBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OfflineActiveData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardPrice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="manageCard" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="posBatchNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="posRefNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="productName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="retriRefNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="salePrice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MtqyBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RCorporateNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RMerchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RTermNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="queryType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MtqyData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="merchantTxns" nillable="true" type="ax246:MerchantTxn" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MerchantTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="inputChannel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnTime" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="M27j27CardTxnBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="queryType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CtqyData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardTxns" nillable="true" type="ax246:CardTxn" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="adjustAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="earnAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="inputChannel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="redeemAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="transferAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnTime" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="M27j27CardInfoBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InfoData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cards" nillable="true" type="ax246:Card" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Card">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="activedDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="balance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hotReason" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="issuerCreateUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="loyaltyClub" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNoName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ItrfBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ItrfPinBillBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="billNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IslvWithTimeBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="buyPerson" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="date" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="discount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="serialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="time" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ByCodeMsg">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="serialNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IslvSignUnSignBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardInfos" nillable="true" type="ax246:OrderCardInfo" />
+          <xs:element minOccurs="0" name="discountAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderContact" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderIdName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderIdNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderIdType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderSex" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="payInfos" nillable="true" type="ax246:OrderPayInfo" />
+          <xs:element minOccurs="0" name="signFlag" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrderCardInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNum" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmCellPhoneNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmIdNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmSex" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrderPayInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="bBankCardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="bBankName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="oRemark" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="payAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="payType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="tAccountName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="tAccountNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IslvSignUnSignData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IslvBySignUnSignBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardInfos" nillable="true" type="ax246:SignUnSignOrderCardInfo" />
+          <xs:element minOccurs="0" name="discountAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderContact" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderIdName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderIdNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderIdType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="holderSex" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="payInfos" nillable="true" type="ax246:OrderPayInfo" />
+          <xs:element minOccurs="0" name="signFlag" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SignUnSignOrderCardInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNum" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IslvBySignUnSignData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ByIslvBillBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="billNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="buyPerson" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="discount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="serialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ByIslvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="buyPerson" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="discount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="serialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IslvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="buyPerson" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="discount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IrecBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IprfBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InfoWpBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InfoFhscBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InfoFhscData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cards" nillable="true" type="ax246:CardAll" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardAll">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="activedDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addHotDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="balance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="deleteHotDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hotReason" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hotReasonName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="issueDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="issuerCreateUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="loyaltyClub" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="loyaltyClubName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pinRetry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="statusName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InfoDataC4p">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardsCp4" nillable="true" type="ax246:CardCP4" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardCP4">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="activedDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="balance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cm_pin_retry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hotReason" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="issuerCreateUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="loyaltyClub" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNoName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IbaBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isVerifyPassword" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IbaData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cards" nillable="true" type="ax246:CardAll" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InfoBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InactiveBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="opeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="refNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqTxnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqTxnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InactiveData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardPrice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="refNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resTxnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resTxnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="saleAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="terminal" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdvvByBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DMerchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="serialNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdvvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DMerchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IbvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="VPassword" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="voucherNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IbvData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardClub" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="remarks" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resultAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resultDate" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdadPinBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RMerchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pin" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdadBill4BYJKBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="billNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isVerifyPassword" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="terminal" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txndate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txntime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdadBillData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="balance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="club" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiryDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnid" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdadBillBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="billNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="terminal" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txndate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txntime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdadFhscBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RMerchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IdadBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RMerchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IctvBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IcInfoByAllBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IcInfoByAllData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cards" nillable="true" type="ax246:IcCard" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IcCard">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="activedDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="balance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hotReason" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hotReasonName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNoName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="statusName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IcDestoryCardBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hotReason" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IcDestoryCardData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="balance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="resId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DestoryBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DestoryData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="batchNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardTxns" nillable="true" type="ax246:CardTxn" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="returnMsg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CtqyBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="queryType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CtqyWpBean">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ax246:CtqyBean">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="CtqyBillBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="billNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CtqyBillData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardTxns" nillable="true" type="ax246:CardTxnAll" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardTxnAll">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="adjustAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="adjustPoints" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="balanceAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="balancePoints" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="corporateName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="corporateNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="downAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="downPoints" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="earnAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="earnPoints" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="inputChannel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="inputChannelName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="loyaltyClub" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="loyaltyClubDesc" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgTxnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="redeemAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="redeemPoints" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="remarks" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="termNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="transferAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="transferPoints" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnPoints" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="upAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="upPoints" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CbhbBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="queryType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="txnType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CbhbData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardTxns" nillable="true" type="ax246:CardTxnAll" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CbaBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="billNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPager" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isVerifyPassword" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pageSize" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="queryType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="remarks" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="spPara" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="specialRequest" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="txnType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CbaData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardTxns" nillable="true" type="ax246:CardTxnAll" />
+          <xs:element minOccurs="0" name="codeMsg" nillable="true" type="ax246:CodeMsg" />
+          <xs:element minOccurs="0" name="total" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CckpBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardSignBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardSignInfos" nillable="true" type="ax246:CardSignInfo" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardSignInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNum" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmCellPhoneNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmIdNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="icmSex" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="signFlag" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardSignFlagRegisterBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardSignFlagRegisterInfos" nillable="true" type="ax246:CardSignFlagRegisterInfo" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardSignFlagRegisterInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNum" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="signFlag" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="BatchPostponeBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqExpireDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActiveBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqTxnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reqTxnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="salePrice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActiveData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resTxnDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="resTxnTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="salePrice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="buyPerson" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cardNoTo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expiredDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://bean.service.cardholder.ws.cul.com/xsd">
+      <xs:complexType name="InfoBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://bean.service.gap.ws.cul.com/xsd">
+      <xs:complexType name="IrfdBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orderId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="requestNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="txnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IrfdQryBean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchantNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orderId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="refundData" nillable="true" type="ax248:WSTxnRefundData" />
+          <xs:element minOccurs="0" name="requestNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WSTxnRefundData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="oriTxnId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="payAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="refundAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="refundId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="requestUser" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax251="http://bean.service.cardholder.ws.cul.com/xsd" xmlns:ax249="http://bean.service.gap.ws.cul.com/xsd" xmlns:ax247="http://bean.service.imtxn.ws.cul.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.imtxn.ws.cul.com">
+      <xs:import namespace="http://bean.service.imtxn.ws.cul.com/xsd" />
+      <xs:import namespace="http://bean.service.gap.ws.cul.com/xsd" />
+      <xs:import namespace="http://bean.service.cardholder.ws.cul.com/xsd" />
+      <xs:element name="vtxnvoid">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VtxnvoidBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vtxnvoidResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vtqy">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VtqyBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vtqyResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VtqyData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vstat">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VStatusBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vstatResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vrstp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VrstpBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vrstpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vislv">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VIslvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vislvResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vinfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VInfoBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vinfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VInfoData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vidvv">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VIdvvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="vidvvResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="victv">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:VIctvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="victvResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:VCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:UpdpBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="stat">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:StatBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="statResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="rstpt">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:RstptBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="rstptResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="rstp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:RstpBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="rstpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="offlineActiveC4p">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:OfflineActiveBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="offlineActiveC4pResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:OfflineActiveData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mtqy">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:MtqyBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mtqyResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:MtqyData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="m27j27CardTxn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:M27j27CardTxnBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="m27j27CardTxnResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CtqyData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="m27j27CardInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:M27j27CardInfoBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="m27j27CardInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:InfoData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="itrfWithPin">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ItrfBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="itrfWithPinResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="itrfByAll">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ItrfPinBillBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="itrfByAllResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="itrf">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ItrfBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="itrfResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvwithtime">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IslvWithTimeBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvwithtimeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:ByCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvSignUnSign">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IslvSignUnSignBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvSignUnSignResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IslvSignUnSignData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvBySignUnSign">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IslvBySignUnSignBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvBySignUnSignResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IslvBySignUnSignData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvByBillForewarn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ByIslvBillBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvByBillForewarnResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:ByCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvByBill">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ByIslvBillBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvByBillResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:ByCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvBy">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ByIslvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvByResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:ByCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islv">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IslvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="islvResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="irfdWithGW">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax249:IrfdBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="irfdWithGWResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="irfdQryWithGateWay">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax249:IrfdQryBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="irfdQryWithGateWayResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax249:IrfdQryBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="irec">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IrecBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="irecResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="iprfc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IprfBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="iprfcResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="iprf">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IprfBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="iprfResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoWithPin">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:InfoWpBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoWithPinResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:InfoData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoFHSC">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:InfoFhscBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoFHSCResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:InfoFhscData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoC4p">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax251:InfoBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoC4pResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:InfoDataC4p" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoByAll">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IbaBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoByAllResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IbaData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="info">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:InfoBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="infoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:InfoData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="inactive">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:InactiveBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="inactiveResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:InactiveData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idvvByBill">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdvvByBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idvvByBillResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:ByCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idvvBy">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdvvByBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idvvByResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:ByCodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idvv">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdvvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idvvResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idpvByVoucher">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IbvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idpvByVoucherResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IbvData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadWithPin">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdadPinBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadWithPinResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadWithBill4BYJK">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdadBill4BYJKBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadWithBill4BYJKResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IdadBillData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadWithBill">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdadBillBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadWithBillResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IdadBillData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadFHSC">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdadFhscBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadFHSCResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IdadBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="idadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ictv">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IctvBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ictvResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="icInfoByAll">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IcInfoByAllBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="icInfoByAllResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IcInfoByAllData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="icDestoryCard">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:IcDestoryCardBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="icDestoryCardResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:IcDestoryCardData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCellPhone">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="issuerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="cardno" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCellPhoneResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="echo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="arg" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="echoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="destoryCard">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:DestoryBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="destoryCardResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:DestoryData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyWithPin">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CtqyWpBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyWithPinResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CtqyData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyWithBill">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CtqyBillBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyWithBillResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CtqyBillData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyByHbsw">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CbhbBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyByHbswResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CbhbData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyByAll">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CbaBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyByAllResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CbaData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqy">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CtqyBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ctqyResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CtqyData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cckp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CckpBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cckpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cardSignSYNC">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CardSignBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cardSignSYNCResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cardSignFlagRegister">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:CardSignFlagRegisterBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cardSignFlagRegisterResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="batchPostpone">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:BatchPostponeBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="batchPostponeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="active">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ActiveBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="activeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:ActiveData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="activate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="bean" nillable="true" type="ax247:ActBean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="activateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax247:CodeMsg" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="infoWithPinRequest">
+    <wsdl:part name="parameters" element="ns:infoWithPin" />
+  </wsdl:message>
+  <wsdl:message name="infoWithPinResponse">
+    <wsdl:part name="parameters" element="ns:infoWithPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="cardSignFlagRegisterRequest">
+    <wsdl:part name="parameters" element="ns:cardSignFlagRegister" />
+  </wsdl:message>
+  <wsdl:message name="cardSignFlagRegisterResponse">
+    <wsdl:part name="parameters" element="ns:cardSignFlagRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="ctqyWithPinRequest">
+    <wsdl:part name="parameters" element="ns:ctqyWithPin" />
+  </wsdl:message>
+  <wsdl:message name="ctqyWithPinResponse">
+    <wsdl:part name="parameters" element="ns:ctqyWithPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="iprfcRequest">
+    <wsdl:part name="parameters" element="ns:iprfc" />
+  </wsdl:message>
+  <wsdl:message name="iprfcResponse">
+    <wsdl:part name="parameters" element="ns:iprfcResponse" />
+  </wsdl:message>
+  <wsdl:message name="rstpRequest">
+    <wsdl:part name="parameters" element="ns:rstp" />
+  </wsdl:message>
+  <wsdl:message name="rstpResponse">
+    <wsdl:part name="parameters" element="ns:rstpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCellPhoneRequest">
+    <wsdl:part name="parameters" element="ns:getCellPhone" />
+  </wsdl:message>
+  <wsdl:message name="getCellPhoneResponse">
+    <wsdl:part name="parameters" element="ns:getCellPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="ctqyWithBillRequest">
+    <wsdl:part name="parameters" element="ns:ctqyWithBill" />
+  </wsdl:message>
+  <wsdl:message name="ctqyWithBillResponse">
+    <wsdl:part name="parameters" element="ns:ctqyWithBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="itrfWithPinRequest">
+    <wsdl:part name="parameters" element="ns:itrfWithPin" />
+  </wsdl:message>
+  <wsdl:message name="itrfWithPinResponse">
+    <wsdl:part name="parameters" element="ns:itrfWithPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="rstptRequest">
+    <wsdl:part name="parameters" element="ns:rstpt" />
+  </wsdl:message>
+  <wsdl:message name="rstptResponse">
+    <wsdl:part name="parameters" element="ns:rstptResponse" />
+  </wsdl:message>
+  <wsdl:message name="infoByAllRequest">
+    <wsdl:part name="parameters" element="ns:infoByAll" />
+  </wsdl:message>
+  <wsdl:message name="infoByAllResponse">
+    <wsdl:part name="parameters" element="ns:infoByAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="icInfoByAllRequest">
+    <wsdl:part name="parameters" element="ns:icInfoByAll" />
+  </wsdl:message>
+  <wsdl:message name="icInfoByAllResponse">
+    <wsdl:part name="parameters" element="ns:icInfoByAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="batchPostponeRequest">
+    <wsdl:part name="parameters" element="ns:batchPostpone" />
+  </wsdl:message>
+  <wsdl:message name="batchPostponeResponse">
+    <wsdl:part name="parameters" element="ns:batchPostponeResponse" />
+  </wsdl:message>
+  <wsdl:message name="cckpRequest">
+    <wsdl:part name="parameters" element="ns:cckp" />
+  </wsdl:message>
+  <wsdl:message name="cckpResponse">
+    <wsdl:part name="parameters" element="ns:cckpResponse" />
+  </wsdl:message>
+  <wsdl:message name="statRequest">
+    <wsdl:part name="parameters" element="ns:stat" />
+  </wsdl:message>
+  <wsdl:message name="statResponse">
+    <wsdl:part name="parameters" element="ns:statResponse" />
+  </wsdl:message>
+  <wsdl:message name="idadWithBillRequest">
+    <wsdl:part name="parameters" element="ns:idadWithBill" />
+  </wsdl:message>
+  <wsdl:message name="idadWithBillResponse">
+    <wsdl:part name="parameters" element="ns:idadWithBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="ctqyRequest">
+    <wsdl:part name="parameters" element="ns:ctqy" />
+  </wsdl:message>
+  <wsdl:message name="ctqyResponse">
+    <wsdl:part name="parameters" element="ns:ctqyResponse" />
+  </wsdl:message>
+  <wsdl:message name="idvvByRequest">
+    <wsdl:part name="parameters" element="ns:idvvBy" />
+  </wsdl:message>
+  <wsdl:message name="idvvByResponse">
+    <wsdl:part name="parameters" element="ns:idvvByResponse" />
+  </wsdl:message>
+  <wsdl:message name="islvByBillRequest">
+    <wsdl:part name="parameters" element="ns:islvByBill" />
+  </wsdl:message>
+  <wsdl:message name="islvByBillResponse">
+    <wsdl:part name="parameters" element="ns:islvByBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="updpRequest">
+    <wsdl:part name="parameters" element="ns:updp" />
+  </wsdl:message>
+  <wsdl:message name="updpResponse">
+    <wsdl:part name="parameters" element="ns:updpResponse" />
+  </wsdl:message>
+  <wsdl:message name="echoRequest">
+    <wsdl:part name="parameters" element="ns:echo" />
+  </wsdl:message>
+  <wsdl:message name="echoResponse">
+    <wsdl:part name="parameters" element="ns:echoResponse" />
+  </wsdl:message>
+  <wsdl:message name="idadFHSCRequest">
+    <wsdl:part name="parameters" element="ns:idadFHSC" />
+  </wsdl:message>
+  <wsdl:message name="idadFHSCResponse">
+    <wsdl:part name="parameters" element="ns:idadFHSCResponse" />
+  </wsdl:message>
+  <wsdl:message name="irfdQryWithGateWayRequest">
+    <wsdl:part name="parameters" element="ns:irfdQryWithGateWay" />
+  </wsdl:message>
+  <wsdl:message name="irfdQryWithGateWayResponse">
+    <wsdl:part name="parameters" element="ns:irfdQryWithGateWayResponse" />
+  </wsdl:message>
+  <wsdl:message name="vtqyRequest">
+    <wsdl:part name="parameters" element="ns:vtqy" />
+  </wsdl:message>
+  <wsdl:message name="vtqyResponse">
+    <wsdl:part name="parameters" element="ns:vtqyResponse" />
+  </wsdl:message>
+  <wsdl:message name="islvSignUnSignRequest">
+    <wsdl:part name="parameters" element="ns:islvSignUnSign" />
+  </wsdl:message>
+  <wsdl:message name="islvSignUnSignResponse">
+    <wsdl:part name="parameters" element="ns:islvSignUnSignResponse" />
+  </wsdl:message>
+  <wsdl:message name="idpvByVoucherRequest">
+    <wsdl:part name="parameters" element="ns:idpvByVoucher" />
+  </wsdl:message>
+  <wsdl:message name="idpvByVoucherResponse">
+    <wsdl:part name="parameters" element="ns:idpvByVoucherResponse" />
+  </wsdl:message>
+  <wsdl:message name="idadWithPinRequest">
+    <wsdl:part name="parameters" element="ns:idadWithPin" />
+  </wsdl:message>
+  <wsdl:message name="idadWithPinResponse">
+    <wsdl:part name="parameters" element="ns:idadWithPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="m27j27CardInfoRequest">
+    <wsdl:part name="parameters" element="ns:m27j27CardInfo" />
+  </wsdl:message>
+  <wsdl:message name="m27j27CardInfoResponse">
+    <wsdl:part name="parameters" element="ns:m27j27CardInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="infoRequest">
+    <wsdl:part name="parameters" element="ns:info" />
+  </wsdl:message>
+  <wsdl:message name="infoResponse">
+    <wsdl:part name="parameters" element="ns:infoResponse" />
+  </wsdl:message>
+  <wsdl:message name="m27j27CardTxnRequest">
+    <wsdl:part name="parameters" element="ns:m27j27CardTxn" />
+  </wsdl:message>
+  <wsdl:message name="m27j27CardTxnResponse">
+    <wsdl:part name="parameters" element="ns:m27j27CardTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="ctqyByAllRequest">
+    <wsdl:part name="parameters" element="ns:ctqyByAll" />
+  </wsdl:message>
+  <wsdl:message name="ctqyByAllResponse">
+    <wsdl:part name="parameters" element="ns:ctqyByAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ictvRequest">
+    <wsdl:part name="parameters" element="ns:ictv" />
+  </wsdl:message>
+  <wsdl:message name="ictvResponse">
+    <wsdl:part name="parameters" element="ns:ictvResponse" />
+  </wsdl:message>
+  <wsdl:message name="irecRequest">
+    <wsdl:part name="parameters" element="ns:irec" />
+  </wsdl:message>
+  <wsdl:message name="irecResponse">
+    <wsdl:part name="parameters" element="ns:irecResponse" />
+  </wsdl:message>
+  <wsdl:message name="iprfRequest">
+    <wsdl:part name="parameters" element="ns:iprf" />
+  </wsdl:message>
+  <wsdl:message name="iprfResponse">
+    <wsdl:part name="parameters" element="ns:iprfResponse" />
+  </wsdl:message>
+  <wsdl:message name="islvRequest">
+    <wsdl:part name="parameters" element="ns:islv" />
+  </wsdl:message>
+  <wsdl:message name="islvResponse">
+    <wsdl:part name="parameters" element="ns:islvResponse" />
+  </wsdl:message>
+  <wsdl:message name="idadRequest">
+    <wsdl:part name="parameters" element="ns:idad" />
+  </wsdl:message>
+  <wsdl:message name="idadResponse">
+    <wsdl:part name="parameters" element="ns:idadResponse" />
+  </wsdl:message>
+  <wsdl:message name="itrfRequest">
+    <wsdl:part name="parameters" element="ns:itrf" />
+  </wsdl:message>
+  <wsdl:message name="itrfResponse">
+    <wsdl:part name="parameters" element="ns:itrfResponse" />
+  </wsdl:message>
+  <wsdl:message name="idvvRequest">
+    <wsdl:part name="parameters" element="ns:idvv" />
+  </wsdl:message>
+  <wsdl:message name="idvvResponse">
+    <wsdl:part name="parameters" element="ns:idvvResponse" />
+  </wsdl:message>
+  <wsdl:message name="vrstpRequest">
+    <wsdl:part name="parameters" element="ns:vrstp" />
+  </wsdl:message>
+  <wsdl:message name="vrstpResponse">
+    <wsdl:part name="parameters" element="ns:vrstpResponse" />
+  </wsdl:message>
+  <wsdl:message name="islvByRequest">
+    <wsdl:part name="parameters" element="ns:islvBy" />
+  </wsdl:message>
+  <wsdl:message name="islvByResponse">
+    <wsdl:part name="parameters" element="ns:islvByResponse" />
+  </wsdl:message>
+  <wsdl:message name="icDestoryCardRequest">
+    <wsdl:part name="parameters" element="ns:icDestoryCard" />
+  </wsdl:message>
+  <wsdl:message name="icDestoryCardResponse">
+    <wsdl:part name="parameters" element="ns:icDestoryCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="offlineActiveC4pRequest">
+    <wsdl:part name="parameters" element="ns:offlineActiveC4p" />
+  </wsdl:message>
+  <wsdl:message name="offlineActiveC4pResponse">
+    <wsdl:part name="parameters" element="ns:offlineActiveC4pResponse" />
+  </wsdl:message>
+  <wsdl:message name="vstatRequest">
+    <wsdl:part name="parameters" element="ns:vstat" />
+  </wsdl:message>
+  <wsdl:message name="vstatResponse">
+    <wsdl:part name="parameters" element="ns:vstatResponse" />
+  </wsdl:message>
+  <wsdl:message name="idvvByBillRequest">
+    <wsdl:part name="parameters" element="ns:idvvByBill" />
+  </wsdl:message>
+  <wsdl:message name="idvvByBillResponse">
+    <wsdl:part name="parameters" element="ns:idvvByBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="cardSignSYNCRequest">
+    <wsdl:part name="parameters" element="ns:cardSignSYNC" />
+  </wsdl:message>
+  <wsdl:message name="cardSignSYNCResponse">
+    <wsdl:part name="parameters" element="ns:cardSignSYNCResponse" />
+  </wsdl:message>
+  <wsdl:message name="activateRequest">
+    <wsdl:part name="parameters" element="ns:activate" />
+  </wsdl:message>
+  <wsdl:message name="activateResponse">
+    <wsdl:part name="parameters" element="ns:activateResponse" />
+  </wsdl:message>
+  <wsdl:message name="infoC4pRequest">
+    <wsdl:part name="parameters" element="ns:infoC4p" />
+  </wsdl:message>
+  <wsdl:message name="infoC4pResponse">
+    <wsdl:part name="parameters" element="ns:infoC4pResponse" />
+  </wsdl:message>
+  <wsdl:message name="idadWithBill4BYJKRequest">
+    <wsdl:part name="parameters" element="ns:idadWithBill4BYJK" />
+  </wsdl:message>
+  <wsdl:message name="idadWithBill4BYJKResponse">
+    <wsdl:part name="parameters" element="ns:idadWithBill4BYJKResponse" />
+  </wsdl:message>
+  <wsdl:message name="islvBySignUnSignRequest">
+    <wsdl:part name="parameters" element="ns:islvBySignUnSign" />
+  </wsdl:message>
+  <wsdl:message name="islvBySignUnSignResponse">
+    <wsdl:part name="parameters" element="ns:islvBySignUnSignResponse" />
+  </wsdl:message>
+  <wsdl:message name="islvByBillForewarnRequest">
+    <wsdl:part name="parameters" element="ns:islvByBillForewarn" />
+  </wsdl:message>
+  <wsdl:message name="islvByBillForewarnResponse">
+    <wsdl:part name="parameters" element="ns:islvByBillForewarnResponse" />
+  </wsdl:message>
+  <wsdl:message name="mtqyRequest">
+    <wsdl:part name="parameters" element="ns:mtqy" />
+  </wsdl:message>
+  <wsdl:message name="mtqyResponse">
+    <wsdl:part name="parameters" element="ns:mtqyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ctqyByHbswRequest">
+    <wsdl:part name="parameters" element="ns:ctqyByHbsw" />
+  </wsdl:message>
+  <wsdl:message name="ctqyByHbswResponse">
+    <wsdl:part name="parameters" element="ns:ctqyByHbswResponse" />
+  </wsdl:message>
+  <wsdl:message name="destoryCardRequest">
+    <wsdl:part name="parameters" element="ns:destoryCard" />
+  </wsdl:message>
+  <wsdl:message name="destoryCardResponse">
+    <wsdl:part name="parameters" element="ns:destoryCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="itrfByAllRequest">
+    <wsdl:part name="parameters" element="ns:itrfByAll" />
+  </wsdl:message>
+  <wsdl:message name="itrfByAllResponse">
+    <wsdl:part name="parameters" element="ns:itrfByAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="inactiveRequest">
+    <wsdl:part name="parameters" element="ns:inactive" />
+  </wsdl:message>
+  <wsdl:message name="inactiveResponse">
+    <wsdl:part name="parameters" element="ns:inactiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="vtxnvoidRequest">
+    <wsdl:part name="parameters" element="ns:vtxnvoid" />
+  </wsdl:message>
+  <wsdl:message name="vtxnvoidResponse">
+    <wsdl:part name="parameters" element="ns:vtxnvoidResponse" />
+  </wsdl:message>
+  <wsdl:message name="irfdWithGWRequest">
+    <wsdl:part name="parameters" element="ns:irfdWithGW" />
+  </wsdl:message>
+  <wsdl:message name="irfdWithGWResponse">
+    <wsdl:part name="parameters" element="ns:irfdWithGWResponse" />
+  </wsdl:message>
+  <wsdl:message name="activeRequest">
+    <wsdl:part name="parameters" element="ns:active" />
+  </wsdl:message>
+  <wsdl:message name="activeResponse">
+    <wsdl:part name="parameters" element="ns:activeResponse" />
+  </wsdl:message>
+  <wsdl:message name="vidvvRequest">
+    <wsdl:part name="parameters" element="ns:vidvv" />
+  </wsdl:message>
+  <wsdl:message name="vidvvResponse">
+    <wsdl:part name="parameters" element="ns:vidvvResponse" />
+  </wsdl:message>
+  <wsdl:message name="victvRequest">
+    <wsdl:part name="parameters" element="ns:victv" />
+  </wsdl:message>
+  <wsdl:message name="victvResponse">
+    <wsdl:part name="parameters" element="ns:victvResponse" />
+  </wsdl:message>
+  <wsdl:message name="vislvRequest">
+    <wsdl:part name="parameters" element="ns:vislv" />
+  </wsdl:message>
+  <wsdl:message name="vislvResponse">
+    <wsdl:part name="parameters" element="ns:vislvResponse" />
+  </wsdl:message>
+  <wsdl:message name="vinfoRequest">
+    <wsdl:part name="parameters" element="ns:vinfo" />
+  </wsdl:message>
+  <wsdl:message name="vinfoResponse">
+    <wsdl:part name="parameters" element="ns:vinfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="islvwithtimeRequest">
+    <wsdl:part name="parameters" element="ns:islvwithtime" />
+  </wsdl:message>
+  <wsdl:message name="islvwithtimeResponse">
+    <wsdl:part name="parameters" element="ns:islvwithtimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="infoFHSCRequest">
+    <wsdl:part name="parameters" element="ns:infoFHSC" />
+  </wsdl:message>
+  <wsdl:message name="infoFHSCResponse">
+    <wsdl:part name="parameters" element="ns:infoFHSCResponse" />
+  </wsdl:message>
+  <wsdl:portType xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" wsp:PolicyURIs="#UTOverTransport" name="imTxnServicePortType">
+    <wsdl:operation name="infoWithPin">
+      <wsdl:input wsaw:Action="urn:infoWithPin" message="ns:infoWithPinRequest" />
+      <wsdl:output wsaw:Action="urn:infoWithPinResponse" message="ns:infoWithPinResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="cardSignFlagRegister">
+      <wsdl:input wsaw:Action="urn:cardSignFlagRegister" message="ns:cardSignFlagRegisterRequest" />
+      <wsdl:output wsaw:Action="urn:cardSignFlagRegisterResponse" message="ns:cardSignFlagRegisterResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithPin">
+      <wsdl:input wsaw:Action="urn:ctqyWithPin" message="ns:ctqyWithPinRequest" />
+      <wsdl:output wsaw:Action="urn:ctqyWithPinResponse" message="ns:ctqyWithPinResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="iprfc">
+      <wsdl:input wsaw:Action="urn:iprfc" message="ns:iprfcRequest" />
+      <wsdl:output wsaw:Action="urn:iprfcResponse" message="ns:iprfcResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="rstp">
+      <wsdl:input wsaw:Action="urn:rstp" message="ns:rstpRequest" />
+      <wsdl:output wsaw:Action="urn:rstpResponse" message="ns:rstpResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCellPhone">
+      <wsdl:input wsaw:Action="urn:getCellPhone" message="ns:getCellPhoneRequest" />
+      <wsdl:output wsaw:Action="urn:getCellPhoneResponse" message="ns:getCellPhoneResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithBill">
+      <wsdl:input wsaw:Action="urn:ctqyWithBill" message="ns:ctqyWithBillRequest" />
+      <wsdl:output wsaw:Action="urn:ctqyWithBillResponse" message="ns:ctqyWithBillResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="itrfWithPin">
+      <wsdl:input wsaw:Action="urn:itrfWithPin" message="ns:itrfWithPinRequest" />
+      <wsdl:output wsaw:Action="urn:itrfWithPinResponse" message="ns:itrfWithPinResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="rstpt">
+      <wsdl:input wsaw:Action="urn:rstpt" message="ns:rstptRequest" />
+      <wsdl:output wsaw:Action="urn:rstptResponse" message="ns:rstptResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="infoByAll">
+      <wsdl:input wsaw:Action="urn:infoByAll" message="ns:infoByAllRequest" />
+      <wsdl:output wsaw:Action="urn:infoByAllResponse" message="ns:infoByAllResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="icInfoByAll">
+      <wsdl:input wsaw:Action="urn:icInfoByAll" message="ns:icInfoByAllRequest" />
+      <wsdl:output wsaw:Action="urn:icInfoByAllResponse" message="ns:icInfoByAllResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="batchPostpone">
+      <wsdl:input wsaw:Action="urn:batchPostpone" message="ns:batchPostponeRequest" />
+      <wsdl:output wsaw:Action="urn:batchPostponeResponse" message="ns:batchPostponeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="cckp">
+      <wsdl:input wsaw:Action="urn:cckp" message="ns:cckpRequest" />
+      <wsdl:output wsaw:Action="urn:cckpResponse" message="ns:cckpResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="stat">
+      <wsdl:input wsaw:Action="urn:stat" message="ns:statRequest" />
+      <wsdl:output wsaw:Action="urn:statResponse" message="ns:statResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill">
+      <wsdl:input wsaw:Action="urn:idadWithBill" message="ns:idadWithBillRequest" />
+      <wsdl:output wsaw:Action="urn:idadWithBillResponse" message="ns:idadWithBillResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ctqy">
+      <wsdl:input wsaw:Action="urn:ctqy" message="ns:ctqyRequest" />
+      <wsdl:output wsaw:Action="urn:ctqyResponse" message="ns:ctqyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idvvBy">
+      <wsdl:input wsaw:Action="urn:idvvBy" message="ns:idvvByRequest" />
+      <wsdl:output wsaw:Action="urn:idvvByResponse" message="ns:idvvByResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="islvByBill">
+      <wsdl:input wsaw:Action="urn:islvByBill" message="ns:islvByBillRequest" />
+      <wsdl:output wsaw:Action="urn:islvByBillResponse" message="ns:islvByBillResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updp">
+      <wsdl:input wsaw:Action="urn:updp" message="ns:updpRequest" />
+      <wsdl:output wsaw:Action="urn:updpResponse" message="ns:updpResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <wsdl:input wsaw:Action="urn:echo" message="ns:echoRequest" />
+      <wsdl:output wsaw:Action="urn:echoResponse" message="ns:echoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idadFHSC">
+      <wsdl:input wsaw:Action="urn:idadFHSC" message="ns:idadFHSCRequest" />
+      <wsdl:output wsaw:Action="urn:idadFHSCResponse" message="ns:idadFHSCResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="irfdQryWithGateWay">
+      <wsdl:input wsaw:Action="urn:irfdQryWithGateWay" message="ns:irfdQryWithGateWayRequest" />
+      <wsdl:output wsaw:Action="urn:irfdQryWithGateWayResponse" message="ns:irfdQryWithGateWayResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="vtqy">
+      <wsdl:input wsaw:Action="urn:vtqy" message="ns:vtqyRequest" />
+      <wsdl:output wsaw:Action="urn:vtqyResponse" message="ns:vtqyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="islvSignUnSign">
+      <wsdl:input wsaw:Action="urn:islvSignUnSign" message="ns:islvSignUnSignRequest" />
+      <wsdl:output wsaw:Action="urn:islvSignUnSignResponse" message="ns:islvSignUnSignResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idpvByVoucher">
+      <wsdl:input wsaw:Action="urn:idpvByVoucher" message="ns:idpvByVoucherRequest" />
+      <wsdl:output wsaw:Action="urn:idpvByVoucherResponse" message="ns:idpvByVoucherResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idadWithPin">
+      <wsdl:input wsaw:Action="urn:idadWithPin" message="ns:idadWithPinRequest" />
+      <wsdl:output wsaw:Action="urn:idadWithPinResponse" message="ns:idadWithPinResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardInfo">
+      <wsdl:input wsaw:Action="urn:m27j27CardInfo" message="ns:m27j27CardInfoRequest" />
+      <wsdl:output wsaw:Action="urn:m27j27CardInfoResponse" message="ns:m27j27CardInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="info">
+      <wsdl:input wsaw:Action="urn:info" message="ns:infoRequest" />
+      <wsdl:output wsaw:Action="urn:infoResponse" message="ns:infoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardTxn">
+      <wsdl:input wsaw:Action="urn:m27j27CardTxn" message="ns:m27j27CardTxnRequest" />
+      <wsdl:output wsaw:Action="urn:m27j27CardTxnResponse" message="ns:m27j27CardTxnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByAll">
+      <wsdl:input wsaw:Action="urn:ctqyByAll" message="ns:ctqyByAllRequest" />
+      <wsdl:output wsaw:Action="urn:ctqyByAllResponse" message="ns:ctqyByAllResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ictv">
+      <wsdl:input wsaw:Action="urn:ictv" message="ns:ictvRequest" />
+      <wsdl:output wsaw:Action="urn:ictvResponse" message="ns:ictvResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="irec">
+      <wsdl:input wsaw:Action="urn:irec" message="ns:irecRequest" />
+      <wsdl:output wsaw:Action="urn:irecResponse" message="ns:irecResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="iprf">
+      <wsdl:input wsaw:Action="urn:iprf" message="ns:iprfRequest" />
+      <wsdl:output wsaw:Action="urn:iprfResponse" message="ns:iprfResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="islv">
+      <wsdl:input wsaw:Action="urn:islv" message="ns:islvRequest" />
+      <wsdl:output wsaw:Action="urn:islvResponse" message="ns:islvResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idad">
+      <wsdl:input wsaw:Action="urn:idad" message="ns:idadRequest" />
+      <wsdl:output wsaw:Action="urn:idadResponse" message="ns:idadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="itrf">
+      <wsdl:input wsaw:Action="urn:itrf" message="ns:itrfRequest" />
+      <wsdl:output wsaw:Action="urn:itrfResponse" message="ns:itrfResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idvv">
+      <wsdl:input wsaw:Action="urn:idvv" message="ns:idvvRequest" />
+      <wsdl:output wsaw:Action="urn:idvvResponse" message="ns:idvvResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="vrstp">
+      <wsdl:input wsaw:Action="urn:vrstp" message="ns:vrstpRequest" />
+      <wsdl:output wsaw:Action="urn:vrstpResponse" message="ns:vrstpResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="islvBy">
+      <wsdl:input wsaw:Action="urn:islvBy" message="ns:islvByRequest" />
+      <wsdl:output wsaw:Action="urn:islvByResponse" message="ns:islvByResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="icDestoryCard">
+      <wsdl:input wsaw:Action="urn:icDestoryCard" message="ns:icDestoryCardRequest" />
+      <wsdl:output wsaw:Action="urn:icDestoryCardResponse" message="ns:icDestoryCardResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="offlineActiveC4p">
+      <wsdl:input wsaw:Action="urn:offlineActiveC4p" message="ns:offlineActiveC4pRequest" />
+      <wsdl:output wsaw:Action="urn:offlineActiveC4pResponse" message="ns:offlineActiveC4pResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="vstat">
+      <wsdl:input wsaw:Action="urn:vstat" message="ns:vstatRequest" />
+      <wsdl:output wsaw:Action="urn:vstatResponse" message="ns:vstatResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idvvByBill">
+      <wsdl:input wsaw:Action="urn:idvvByBill" message="ns:idvvByBillRequest" />
+      <wsdl:output wsaw:Action="urn:idvvByBillResponse" message="ns:idvvByBillResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="cardSignSYNC">
+      <wsdl:input wsaw:Action="urn:cardSignSYNC" message="ns:cardSignSYNCRequest" />
+      <wsdl:output wsaw:Action="urn:cardSignSYNCResponse" message="ns:cardSignSYNCResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="activate">
+      <wsdl:input wsaw:Action="urn:activate" message="ns:activateRequest" />
+      <wsdl:output wsaw:Action="urn:activateResponse" message="ns:activateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="infoC4p">
+      <wsdl:input wsaw:Action="urn:infoC4p" message="ns:infoC4pRequest" />
+      <wsdl:output wsaw:Action="urn:infoC4pResponse" message="ns:infoC4pResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill4BYJK">
+      <wsdl:input wsaw:Action="urn:idadWithBill4BYJK" message="ns:idadWithBill4BYJKRequest" />
+      <wsdl:output wsaw:Action="urn:idadWithBill4BYJKResponse" message="ns:idadWithBill4BYJKResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="islvBySignUnSign">
+      <wsdl:input wsaw:Action="urn:islvBySignUnSign" message="ns:islvBySignUnSignRequest" />
+      <wsdl:output wsaw:Action="urn:islvBySignUnSignResponse" message="ns:islvBySignUnSignResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="islvByBillForewarn">
+      <wsdl:input wsaw:Action="urn:islvByBillForewarn" message="ns:islvByBillForewarnRequest" />
+      <wsdl:output wsaw:Action="urn:islvByBillForewarnResponse" message="ns:islvByBillForewarnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="mtqy">
+      <wsdl:input wsaw:Action="urn:mtqy" message="ns:mtqyRequest" />
+      <wsdl:output wsaw:Action="urn:mtqyResponse" message="ns:mtqyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByHbsw">
+      <wsdl:input wsaw:Action="urn:ctqyByHbsw" message="ns:ctqyByHbswRequest" />
+      <wsdl:output wsaw:Action="urn:ctqyByHbswResponse" message="ns:ctqyByHbswResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="destoryCard">
+      <wsdl:input wsaw:Action="urn:destoryCard" message="ns:destoryCardRequest" />
+      <wsdl:output wsaw:Action="urn:destoryCardResponse" message="ns:destoryCardResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="itrfByAll">
+      <wsdl:input wsaw:Action="urn:itrfByAll" message="ns:itrfByAllRequest" />
+      <wsdl:output wsaw:Action="urn:itrfByAllResponse" message="ns:itrfByAllResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="inactive">
+      <wsdl:input wsaw:Action="urn:inactive" message="ns:inactiveRequest" />
+      <wsdl:output wsaw:Action="urn:inactiveResponse" message="ns:inactiveResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="vtxnvoid">
+      <wsdl:input wsaw:Action="urn:vtxnvoid" message="ns:vtxnvoidRequest" />
+      <wsdl:output wsaw:Action="urn:vtxnvoidResponse" message="ns:vtxnvoidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="irfdWithGW">
+      <wsdl:input wsaw:Action="urn:irfdWithGW" message="ns:irfdWithGWRequest" />
+      <wsdl:output wsaw:Action="urn:irfdWithGWResponse" message="ns:irfdWithGWResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="active">
+      <wsdl:input wsaw:Action="urn:active" message="ns:activeRequest" />
+      <wsdl:output wsaw:Action="urn:activeResponse" message="ns:activeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="vidvv">
+      <wsdl:input wsaw:Action="urn:vidvv" message="ns:vidvvRequest" />
+      <wsdl:output wsaw:Action="urn:vidvvResponse" message="ns:vidvvResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="victv">
+      <wsdl:input wsaw:Action="urn:victv" message="ns:victvRequest" />
+      <wsdl:output wsaw:Action="urn:victvResponse" message="ns:victvResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="vislv">
+      <wsdl:input wsaw:Action="urn:vislv" message="ns:vislvRequest" />
+      <wsdl:output wsaw:Action="urn:vislvResponse" message="ns:vislvResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="vinfo">
+      <wsdl:input wsaw:Action="urn:vinfo" message="ns:vinfoRequest" />
+      <wsdl:output wsaw:Action="urn:vinfoResponse" message="ns:vinfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="islvwithtime">
+      <wsdl:input wsaw:Action="urn:islvwithtime" message="ns:islvwithtimeRequest" />
+      <wsdl:output wsaw:Action="urn:islvwithtimeResponse" message="ns:islvwithtimeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="infoFHSC">
+      <wsdl:input wsaw:Action="urn:infoFHSC" message="ns:infoFHSCRequest" />
+      <wsdl:output wsaw:Action="urn:infoFHSCResponse" message="ns:infoFHSCResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="imTxnServiceSoap11Binding" type="ns:imTxnServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="infoWithPin">
+      <soap:operation soapAction="urn:infoWithPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardSignFlagRegister">
+      <soap:operation soapAction="urn:cardSignFlagRegister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithPin">
+      <soap:operation soapAction="urn:ctqyWithPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rstp">
+      <soap:operation soapAction="urn:rstp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="iprfc">
+      <soap:operation soapAction="urn:iprfc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCellPhone">
+      <soap:operation soapAction="urn:getCellPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrfWithPin">
+      <soap:operation soapAction="urn:itrfWithPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithBill">
+      <soap:operation soapAction="urn:ctqyWithBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rstpt">
+      <soap:operation soapAction="urn:rstpt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoByAll">
+      <soap:operation soapAction="urn:infoByAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="icInfoByAll">
+      <soap:operation soapAction="urn:icInfoByAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="batchPostpone">
+      <soap:operation soapAction="urn:batchPostpone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cckp">
+      <soap:operation soapAction="urn:cckp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stat">
+      <soap:operation soapAction="urn:stat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill">
+      <soap:operation soapAction="urn:idadWithBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqy">
+      <soap:operation soapAction="urn:ctqy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvByBill">
+      <soap:operation soapAction="urn:islvByBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvvBy">
+      <soap:operation soapAction="urn:idvvBy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updp">
+      <soap:operation soapAction="urn:updp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <soap:operation soapAction="urn:echo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadFHSC">
+      <soap:operation soapAction="urn:idadFHSC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irfdQryWithGateWay">
+      <soap:operation soapAction="urn:irfdQryWithGateWay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vtqy">
+      <soap:operation soapAction="urn:vtqy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvSignUnSign">
+      <soap:operation soapAction="urn:islvSignUnSign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithPin">
+      <soap:operation soapAction="urn:idadWithPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idpvByVoucher">
+      <soap:operation soapAction="urn:idpvByVoucher" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardInfo">
+      <soap:operation soapAction="urn:m27j27CardInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="info">
+      <soap:operation soapAction="urn:info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ictv">
+      <soap:operation soapAction="urn:ictv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByAll">
+      <soap:operation soapAction="urn:ctqyByAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardTxn">
+      <soap:operation soapAction="urn:m27j27CardTxn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islv">
+      <soap:operation soapAction="urn:islv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="iprf">
+      <soap:operation soapAction="urn:iprf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irec">
+      <soap:operation soapAction="urn:irec" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idad">
+      <soap:operation soapAction="urn:idad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrf">
+      <soap:operation soapAction="urn:itrf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vrstp">
+      <soap:operation soapAction="urn:vrstp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvv">
+      <soap:operation soapAction="urn:idvv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvBy">
+      <soap:operation soapAction="urn:islvBy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="offlineActiveC4p">
+      <soap:operation soapAction="urn:offlineActiveC4p" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vstat">
+      <soap:operation soapAction="urn:vstat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="icDestoryCard">
+      <soap:operation soapAction="urn:icDestoryCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvvByBill">
+      <soap:operation soapAction="urn:idvvByBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="activate">
+      <soap:operation soapAction="urn:activate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardSignSYNC">
+      <soap:operation soapAction="urn:cardSignSYNC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill4BYJK">
+      <soap:operation soapAction="urn:idadWithBill4BYJK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoC4p">
+      <soap:operation soapAction="urn:infoC4p" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvBySignUnSign">
+      <soap:operation soapAction="urn:islvBySignUnSign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvByBillForewarn">
+      <soap:operation soapAction="urn:islvByBillForewarn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mtqy">
+      <soap:operation soapAction="urn:mtqy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByHbsw">
+      <soap:operation soapAction="urn:ctqyByHbsw" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destoryCard">
+      <soap:operation soapAction="urn:destoryCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrfByAll">
+      <soap:operation soapAction="urn:itrfByAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inactive">
+      <soap:operation soapAction="urn:inactive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vtxnvoid">
+      <soap:operation soapAction="urn:vtxnvoid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irfdWithGW">
+      <soap:operation soapAction="urn:irfdWithGW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="active">
+      <soap:operation soapAction="urn:active" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvwithtime">
+      <soap:operation soapAction="urn:islvwithtime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vidvv">
+      <soap:operation soapAction="urn:vidvv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vislv">
+      <soap:operation soapAction="urn:vislv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="victv">
+      <soap:operation soapAction="urn:victv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vinfo">
+      <soap:operation soapAction="urn:vinfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoFHSC">
+      <soap:operation soapAction="urn:infoFHSC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="imTxnServiceSoap12Binding" type="ns:imTxnServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="infoWithPin">
+      <soap12:operation soapAction="urn:infoWithPin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardSignFlagRegister">
+      <soap12:operation soapAction="urn:cardSignFlagRegister" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithPin">
+      <soap12:operation soapAction="urn:ctqyWithPin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rstp">
+      <soap12:operation soapAction="urn:rstp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="iprfc">
+      <soap12:operation soapAction="urn:iprfc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCellPhone">
+      <soap12:operation soapAction="urn:getCellPhone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrfWithPin">
+      <soap12:operation soapAction="urn:itrfWithPin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithBill">
+      <soap12:operation soapAction="urn:ctqyWithBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rstpt">
+      <soap12:operation soapAction="urn:rstpt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoByAll">
+      <soap12:operation soapAction="urn:infoByAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="icInfoByAll">
+      <soap12:operation soapAction="urn:icInfoByAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="batchPostpone">
+      <soap12:operation soapAction="urn:batchPostpone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cckp">
+      <soap12:operation soapAction="urn:cckp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stat">
+      <soap12:operation soapAction="urn:stat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill">
+      <soap12:operation soapAction="urn:idadWithBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqy">
+      <soap12:operation soapAction="urn:ctqy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvByBill">
+      <soap12:operation soapAction="urn:islvByBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvvBy">
+      <soap12:operation soapAction="urn:idvvBy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updp">
+      <soap12:operation soapAction="urn:updp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <soap12:operation soapAction="urn:echo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadFHSC">
+      <soap12:operation soapAction="urn:idadFHSC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irfdQryWithGateWay">
+      <soap12:operation soapAction="urn:irfdQryWithGateWay" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vtqy">
+      <soap12:operation soapAction="urn:vtqy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvSignUnSign">
+      <soap12:operation soapAction="urn:islvSignUnSign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithPin">
+      <soap12:operation soapAction="urn:idadWithPin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idpvByVoucher">
+      <soap12:operation soapAction="urn:idpvByVoucher" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardInfo">
+      <soap12:operation soapAction="urn:m27j27CardInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="info">
+      <soap12:operation soapAction="urn:info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ictv">
+      <soap12:operation soapAction="urn:ictv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByAll">
+      <soap12:operation soapAction="urn:ctqyByAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardTxn">
+      <soap12:operation soapAction="urn:m27j27CardTxn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islv">
+      <soap12:operation soapAction="urn:islv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="iprf">
+      <soap12:operation soapAction="urn:iprf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irec">
+      <soap12:operation soapAction="urn:irec" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idad">
+      <soap12:operation soapAction="urn:idad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrf">
+      <soap12:operation soapAction="urn:itrf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vrstp">
+      <soap12:operation soapAction="urn:vrstp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvv">
+      <soap12:operation soapAction="urn:idvv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvBy">
+      <soap12:operation soapAction="urn:islvBy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="offlineActiveC4p">
+      <soap12:operation soapAction="urn:offlineActiveC4p" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vstat">
+      <soap12:operation soapAction="urn:vstat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="icDestoryCard">
+      <soap12:operation soapAction="urn:icDestoryCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvvByBill">
+      <soap12:operation soapAction="urn:idvvByBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="activate">
+      <soap12:operation soapAction="urn:activate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardSignSYNC">
+      <soap12:operation soapAction="urn:cardSignSYNC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill4BYJK">
+      <soap12:operation soapAction="urn:idadWithBill4BYJK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoC4p">
+      <soap12:operation soapAction="urn:infoC4p" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvBySignUnSign">
+      <soap12:operation soapAction="urn:islvBySignUnSign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvByBillForewarn">
+      <soap12:operation soapAction="urn:islvByBillForewarn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mtqy">
+      <soap12:operation soapAction="urn:mtqy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByHbsw">
+      <soap12:operation soapAction="urn:ctqyByHbsw" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destoryCard">
+      <soap12:operation soapAction="urn:destoryCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrfByAll">
+      <soap12:operation soapAction="urn:itrfByAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inactive">
+      <soap12:operation soapAction="urn:inactive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vtxnvoid">
+      <soap12:operation soapAction="urn:vtxnvoid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irfdWithGW">
+      <soap12:operation soapAction="urn:irfdWithGW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="active">
+      <soap12:operation soapAction="urn:active" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvwithtime">
+      <soap12:operation soapAction="urn:islvwithtime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vidvv">
+      <soap12:operation soapAction="urn:vidvv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vislv">
+      <soap12:operation soapAction="urn:vislv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="victv">
+      <soap12:operation soapAction="urn:victv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vinfo">
+      <soap12:operation soapAction="urn:vinfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoFHSC">
+      <soap12:operation soapAction="urn:infoFHSC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="imTxnServiceHttpBinding" type="ns:imTxnServicePortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="infoWithPin">
+      <http:operation location="imTxnService/infoWithPin" />
+      <wsdl:input>
+        <mime:content part="infoWithPin" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="infoWithPin" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardSignFlagRegister">
+      <http:operation location="imTxnService/cardSignFlagRegister" />
+      <wsdl:input>
+        <mime:content part="cardSignFlagRegister" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="cardSignFlagRegister" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithPin">
+      <http:operation location="imTxnService/ctqyWithPin" />
+      <wsdl:input>
+        <mime:content part="ctqyWithPin" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="ctqyWithPin" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rstp">
+      <http:operation location="imTxnService/rstp" />
+      <wsdl:input>
+        <mime:content part="rstp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="rstp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="iprfc">
+      <http:operation location="imTxnService/iprfc" />
+      <wsdl:input>
+        <mime:content part="iprfc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="iprfc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCellPhone">
+      <http:operation location="imTxnService/getCellPhone" />
+      <wsdl:input>
+        <mime:content part="getCellPhone" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCellPhone" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrfWithPin">
+      <http:operation location="imTxnService/itrfWithPin" />
+      <wsdl:input>
+        <mime:content part="itrfWithPin" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="itrfWithPin" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyWithBill">
+      <http:operation location="imTxnService/ctqyWithBill" />
+      <wsdl:input>
+        <mime:content part="ctqyWithBill" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="ctqyWithBill" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rstpt">
+      <http:operation location="imTxnService/rstpt" />
+      <wsdl:input>
+        <mime:content part="rstpt" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="rstpt" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoByAll">
+      <http:operation location="imTxnService/infoByAll" />
+      <wsdl:input>
+        <mime:content part="infoByAll" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="infoByAll" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="icInfoByAll">
+      <http:operation location="imTxnService/icInfoByAll" />
+      <wsdl:input>
+        <mime:content part="icInfoByAll" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="icInfoByAll" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="batchPostpone">
+      <http:operation location="imTxnService/batchPostpone" />
+      <wsdl:input>
+        <mime:content part="batchPostpone" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="batchPostpone" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cckp">
+      <http:operation location="imTxnService/cckp" />
+      <wsdl:input>
+        <mime:content part="cckp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="cckp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stat">
+      <http:operation location="imTxnService/stat" />
+      <wsdl:input>
+        <mime:content part="stat" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="stat" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill">
+      <http:operation location="imTxnService/idadWithBill" />
+      <wsdl:input>
+        <mime:content part="idadWithBill" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idadWithBill" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqy">
+      <http:operation location="imTxnService/ctqy" />
+      <wsdl:input>
+        <mime:content part="ctqy" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="ctqy" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvByBill">
+      <http:operation location="imTxnService/islvByBill" />
+      <wsdl:input>
+        <mime:content part="islvByBill" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="islvByBill" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvvBy">
+      <http:operation location="imTxnService/idvvBy" />
+      <wsdl:input>
+        <mime:content part="idvvBy" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idvvBy" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updp">
+      <http:operation location="imTxnService/updp" />
+      <wsdl:input>
+        <mime:content part="updp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="updp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <http:operation location="imTxnService/echo" />
+      <wsdl:input>
+        <mime:content part="echo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="echo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadFHSC">
+      <http:operation location="imTxnService/idadFHSC" />
+      <wsdl:input>
+        <mime:content part="idadFHSC" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idadFHSC" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irfdQryWithGateWay">
+      <http:operation location="imTxnService/irfdQryWithGateWay" />
+      <wsdl:input>
+        <mime:content part="irfdQryWithGateWay" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="irfdQryWithGateWay" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vtqy">
+      <http:operation location="imTxnService/vtqy" />
+      <wsdl:input>
+        <mime:content part="vtqy" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="vtqy" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvSignUnSign">
+      <http:operation location="imTxnService/islvSignUnSign" />
+      <wsdl:input>
+        <mime:content part="islvSignUnSign" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="islvSignUnSign" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithPin">
+      <http:operation location="imTxnService/idadWithPin" />
+      <wsdl:input>
+        <mime:content part="idadWithPin" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idadWithPin" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idpvByVoucher">
+      <http:operation location="imTxnService/idpvByVoucher" />
+      <wsdl:input>
+        <mime:content part="idpvByVoucher" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idpvByVoucher" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardInfo">
+      <http:operation location="imTxnService/m27j27CardInfo" />
+      <wsdl:input>
+        <mime:content part="m27j27CardInfo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="m27j27CardInfo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="info">
+      <http:operation location="imTxnService/info" />
+      <wsdl:input>
+        <mime:content part="info" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="info" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ictv">
+      <http:operation location="imTxnService/ictv" />
+      <wsdl:input>
+        <mime:content part="ictv" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="ictv" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByAll">
+      <http:operation location="imTxnService/ctqyByAll" />
+      <wsdl:input>
+        <mime:content part="ctqyByAll" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="ctqyByAll" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="m27j27CardTxn">
+      <http:operation location="imTxnService/m27j27CardTxn" />
+      <wsdl:input>
+        <mime:content part="m27j27CardTxn" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="m27j27CardTxn" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islv">
+      <http:operation location="imTxnService/islv" />
+      <wsdl:input>
+        <mime:content part="islv" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="islv" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="iprf">
+      <http:operation location="imTxnService/iprf" />
+      <wsdl:input>
+        <mime:content part="iprf" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="iprf" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irec">
+      <http:operation location="imTxnService/irec" />
+      <wsdl:input>
+        <mime:content part="irec" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="irec" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idad">
+      <http:operation location="imTxnService/idad" />
+      <wsdl:input>
+        <mime:content part="idad" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idad" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrf">
+      <http:operation location="imTxnService/itrf" />
+      <wsdl:input>
+        <mime:content part="itrf" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="itrf" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vrstp">
+      <http:operation location="imTxnService/vrstp" />
+      <wsdl:input>
+        <mime:content part="vrstp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="vrstp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvv">
+      <http:operation location="imTxnService/idvv" />
+      <wsdl:input>
+        <mime:content part="idvv" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idvv" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvBy">
+      <http:operation location="imTxnService/islvBy" />
+      <wsdl:input>
+        <mime:content part="islvBy" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="islvBy" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="offlineActiveC4p">
+      <http:operation location="imTxnService/offlineActiveC4p" />
+      <wsdl:input>
+        <mime:content part="offlineActiveC4p" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="offlineActiveC4p" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vstat">
+      <http:operation location="imTxnService/vstat" />
+      <wsdl:input>
+        <mime:content part="vstat" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="vstat" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="icDestoryCard">
+      <http:operation location="imTxnService/icDestoryCard" />
+      <wsdl:input>
+        <mime:content part="icDestoryCard" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="icDestoryCard" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idvvByBill">
+      <http:operation location="imTxnService/idvvByBill" />
+      <wsdl:input>
+        <mime:content part="idvvByBill" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idvvByBill" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="activate">
+      <http:operation location="imTxnService/activate" />
+      <wsdl:input>
+        <mime:content part="activate" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="activate" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardSignSYNC">
+      <http:operation location="imTxnService/cardSignSYNC" />
+      <wsdl:input>
+        <mime:content part="cardSignSYNC" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="cardSignSYNC" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idadWithBill4BYJK">
+      <http:operation location="imTxnService/idadWithBill4BYJK" />
+      <wsdl:input>
+        <mime:content part="idadWithBill4BYJK" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="idadWithBill4BYJK" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoC4p">
+      <http:operation location="imTxnService/infoC4p" />
+      <wsdl:input>
+        <mime:content part="infoC4p" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="infoC4p" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvBySignUnSign">
+      <http:operation location="imTxnService/islvBySignUnSign" />
+      <wsdl:input>
+        <mime:content part="islvBySignUnSign" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="islvBySignUnSign" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvByBillForewarn">
+      <http:operation location="imTxnService/islvByBillForewarn" />
+      <wsdl:input>
+        <mime:content part="islvByBillForewarn" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="islvByBillForewarn" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mtqy">
+      <http:operation location="imTxnService/mtqy" />
+      <wsdl:input>
+        <mime:content part="mtqy" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="mtqy" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ctqyByHbsw">
+      <http:operation location="imTxnService/ctqyByHbsw" />
+      <wsdl:input>
+        <mime:content part="ctqyByHbsw" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="ctqyByHbsw" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destoryCard">
+      <http:operation location="imTxnService/destoryCard" />
+      <wsdl:input>
+        <mime:content part="destoryCard" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="destoryCard" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itrfByAll">
+      <http:operation location="imTxnService/itrfByAll" />
+      <wsdl:input>
+        <mime:content part="itrfByAll" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="itrfByAll" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inactive">
+      <http:operation location="imTxnService/inactive" />
+      <wsdl:input>
+        <mime:content part="inactive" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="inactive" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vtxnvoid">
+      <http:operation location="imTxnService/vtxnvoid" />
+      <wsdl:input>
+        <mime:content part="vtxnvoid" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="vtxnvoid" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="irfdWithGW">
+      <http:operation location="imTxnService/irfdWithGW" />
+      <wsdl:input>
+        <mime:content part="irfdWithGW" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="irfdWithGW" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="active">
+      <http:operation location="imTxnService/active" />
+      <wsdl:input>
+        <mime:content part="active" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="active" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="islvwithtime">
+      <http:operation location="imTxnService/islvwithtime" />
+      <wsdl:input>
+        <mime:content part="islvwithtime" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="islvwithtime" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vidvv">
+      <http:operation location="imTxnService/vidvv" />
+      <wsdl:input>
+        <mime:content part="vidvv" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="vidvv" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vislv">
+      <http:operation location="imTxnService/vislv" />
+      <wsdl:input>
+        <mime:content part="vislv" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="vislv" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="victv">
+      <http:operation location="imTxnService/victv" />
+      <wsdl:input>
+        <mime:content part="victv" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="victv" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vinfo">
+      <http:operation location="imTxnService/vinfo" />
+      <wsdl:input>
+        <mime:content part="vinfo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="vinfo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoFHSC">
+      <http:operation location="imTxnService/infoFHSC" />
+      <wsdl:input>
+        <mime:content part="infoFHSC" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="infoFHSC" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="imTxnService">
+    <wsdl:port name="imTxnServiceHttpSoap11Endpoint" binding="ns:imTxnServiceSoap11Binding">
+      <soap:address location="http://180.168.71.178:6868/culws/services/imTxnService.imTxnServiceHttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="imTxnServiceHttpSoap12Endpoint" binding="ns:imTxnServiceSoap12Binding">
+      <soap12:address location="http://180.168.71.178:6868/culws/services/imTxnService.imTxnServiceHttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="imTxnServiceHttpEndpoint" binding="ns:imTxnServiceHttpBinding">
+      <http:address location="http://180.168.71.178:6868/culws/services/imTxnService.imTxnServiceHttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
